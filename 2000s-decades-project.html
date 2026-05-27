@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>the2000s_project • Instagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --bg: #fafafa;
+    --border: #dbdbdb;
+    --text: #262626;
+    --secondary: #8e8e8e;
+    --link: #00376b;
+    --ig-grad: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); }
+
+  .cover {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(220,39,67,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 60%, rgba(188,24,136,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 0%, rgba(240,148,51,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .cover-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .cover-decade {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(6rem, 22vw, 16rem);
+    line-height: 0.85;
+    background: var(--ig-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    animation: fadeUp 1s ease both;
+  }
+  .cover-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    margin-top: 1.5rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .cover-question {
+    margin-top: 2.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.2rem 2rem;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    max-width: 560px;
+    position: relative;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+  .cover-question strong { color: #fff; font-weight: 600; }
+  .cover-names {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    position: relative;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+  .cover-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+  }
+
+  .ig-page { background: var(--bg); max-width: 935px; margin: 0 auto; padding-bottom: 4rem; }
+
+  .ig-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .ig-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    background: var(--ig-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .profile-header { background: var(--white); padding: 2rem 2rem 0; border-bottom: 1px solid var(--border); }
+  .profile-top { display: flex; align-items: flex-start; gap: 2.5rem; padding-bottom: 1.5rem; }
+  .avatar-wrap { flex-shrink: 0; }
+  .avatar-ring {
+    width: 86px; height: 86px; border-radius: 50%; padding: 3px;
+    background: var(--ig-grad); display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center; border: 3px solid var(--white);
+  }
+  .avatar-text {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    background: var(--ig-grad); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;
+  }
+  .profile-info { flex: 1; }
+  .profile-username { font-size: 1.25rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 0.8rem; }
+  .profile-stats { display: flex; gap: 2rem; margin-bottom: 1rem; }
+  .stat { text-align: center; }
+  .stat-num { font-weight: 600; font-size: 1rem; }
+  .stat-label { font-size: 0.85rem; color: var(--text); }
+  .profile-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .profile-bio { font-size: 0.875rem; line-height: 1.5; color: var(--text); }
+
+  .highlights { display: flex; gap: 1.5rem; padding: 1.2rem 0; overflow-x: auto; scrollbar-width: none; }
+  .highlights::-webkit-scrollbar { display: none; }
+  .highlight-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; cursor: pointer; flex-shrink: 0; }
+  .highlight-ring { width: 60px; height: 60px; border-radius: 50%; padding: 2px; background: var(--ig-grad); display: flex; align-items: center; justify-content: center; }
+  .highlight-inner { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; border: 2px solid var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; background: #f0f0f0; }
+  .highlight-label { font-size: 0.68rem; color: var(--text); text-align: center; max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .profile-tabs { display: flex; border-top: 1px solid var(--border); }
+  .tab { flex: 1; padding: 0.7rem; display: flex; align-items: center; justify-content: center; cursor: pointer; border-top: 1px solid transparent; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secondary); gap: 0.4rem; font-weight: 500; }
+  .tab.active { border-top-color: var(--text); color: var(--text); }
+
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 3px; }
+  .grid-post { aspect-ratio: 1; overflow: hidden; cursor: pointer; position: relative; background: #eee; }
+  .grid-post img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+  .grid-post:hover img { transform: scale(1.05); }
+  .grid-post-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); display: flex; align-items: center; justify-content: center; gap: 1.5rem; transition: background 0.25s ease; pointer-events: none; }
+  .grid-post:hover .grid-post-overlay { background: rgba(0,0,0,0.35); }
+  .overlay-stat { color: white; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 0.3rem; opacity: 0; transition: opacity 0.25s ease; }
+  .grid-post:hover .overlay-stat { opacity: 1; }
+  .grid-topic-badge { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.6); color: white; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 500; }
+
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; animation: fadeIn 0.2s ease; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 4px; width: 100%; max-width: 960px; max-height: 92vh; display: flex; overflow: hidden; animation: scaleIn 0.25s ease; }
+
+  .modal-img-side { flex: 0 0 52%; background: #000; display: flex; flex-direction: column; }
+  .modal-main-img { flex: 1; overflow: hidden; display: flex; align-items: center; }
+  .modal-main-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modal-thumbs { display: flex; gap: 3px; padding: 4px; background: #111; flex-shrink: 0; }
+  .modal-thumb { flex: 1; aspect-ratio: 1; overflow: hidden; cursor: pointer; opacity: 0.55; transition: opacity 0.2s; border: 2px solid transparent; }
+  .modal-thumb.active { opacity: 1; border-color: white; }
+  .modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .modal-content-side { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .modal-header { display: flex; align-items: center; padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); gap: 0.7rem; }
+  .modal-avatar { width: 34px; height: 34px; border-radius: 50%; padding: 2px; background: var(--ig-grad); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .modal-avatar span { font-family: 'Playfair Display', serif; font-size: 0.6rem; color: white; font-weight: 700; }
+  .modal-user { font-weight: 600; font-size: 0.88rem; flex: 1; }
+  .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); padding: 0.3rem; line-height: 1; }
+
+  .modal-body { flex: 1; overflow-y: auto; padding: 0.9rem 1rem; }
+  .modal-topic-header { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+  .modal-by { font-size: 0.72rem; color: var(--secondary); margin-bottom: 1rem; }
+
+  .modal-qa { margin-bottom: 1rem; }
+  .qa-q { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--secondary); margin-bottom: 0.3rem; }
+  .qa-a { font-size: 0.875rem; line-height: 1.65; color: var(--text); }
+  .qa-divider { height: 1px; background: var(--border); margin: 0.8rem 0; }
+
+  .modal-tags { font-size: 0.85rem; color: var(--link); line-height: 1.8; margin-top: 0.6rem; }
+  .modal-source { font-size: 0.72rem; color: var(--secondary); margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--border); line-height: 1.7; }
+  .modal-source a { color: var(--link); text-decoration: none; }
+  .modal-source a:hover { text-decoration: underline; }
+
+  .modal-footer { border-top: 1px solid var(--border); padding: 0.7rem 1rem; flex-shrink: 0; }
+  .modal-actions { display: flex; gap: 1rem; margin-bottom: 0.5rem; align-items: center; }
+  .action-btn { background: none; border: none; cursor: pointer; font-size: 1.4rem; padding: 0.2rem; display: flex; align-items: center; line-height: 1; transition: transform 0.15s ease; }
+  .action-btn:hover { transform: scale(1.15); }
+  .action-btn.save { margin-left: auto; }
+  .modal-likes { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.3rem; }
+  .modal-date { font-size: 0.72rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .sources-section { max-width: 935px; margin: 3rem auto 0; padding: 2rem; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .sources-title { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--secondary); margin-bottom: 1rem; }
+  .sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.4rem; }
+  .source-item { font-size: 0.82rem; padding: 0.25rem 0; }
+  .source-item a { color: var(--link); text-decoration: none; }
+  .source-item a:hover { text-decoration: underline; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  @media (max-width: 700px) {
+    .profile-top { gap: 1.5rem; }
+    .profile-stats { gap: 1rem; }
+    .modal { flex-direction: column; max-height: 95vh; }
+    .modal-img-side { flex: 0 0 220px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-tag">U.S. History Decades Project</div>
+  <div class="cover-decade">2000s</div>
+  <div class="cover-sub">How Did This Decade Shape and Change America?</div>
+  <div class="cover-question">
+    From <strong>9/11</strong> to the <strong>iPhone</strong>, from <strong>LeBron</strong> to <strong>Beyoncé</strong>, the 2000s changed everything about how Americans live, communicate, and see the world.
+  </div>
+  <div class="cover-names">Daniel Aisner · Connor Juncaj · West Bloomfield High School</div>
+  <div class="cover-scroll">▼ scroll</div>
+</section>
+
+<div class="ig-page">
+  <nav class="ig-nav"><div class="ig-logo">Instagram</div></nav>
+
+  <div class="profile-header">
+    <div class="profile-top">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"><div class="avatar-inner"><span class="avatar-text">00s</span></div></div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-username">the2000s_project</div>
+        <div class="profile-stats">
+          <div class="stat"><div class="stat-num">6</div><div class="stat-label">posts</div></div>
+          <div class="stat"><div class="stat-num">281M</div><div class="stat-label">followers</div></div>
+          <div class="stat"><div class="stat-num">3</div><div class="stat-label">following</div></div>
+        </div>
+        <div class="profile-name">The 2000s Decade 📼</div>
+        <div class="profile-bio">U.S. History Final Project 📚<br>Decade: 2000–2009 🇺🇸<br>By Daniel Aisner &amp; Connor Juncaj<br><span style="color:var(--link)">West Bloomfield High School</span></div>
+      </div>
+    </div>
+    <div class="highlights">
+      <div class="highlight-item" onclick="openModal(0)"><div class="highlight-ring"><div class="highlight-inner">🏈</div></div><span class="highlight-label">Sports</span></div>
+      <div class="highlight-item" onclick="openModal(1)"><div class="highlight-ring"><div class="highlight-inner">💻</div></div><span class="highlight-label">Tech</span></div>
+      <div class="highlight-item" onclick="openModal(2)"><div class="highlight-ring"><div class="highlight-inner">⭐</div></div><span class="highlight-label">Icons</span></div>
+      <div class="highlight-item" onclick="openModal(3)"><div class="highlight-ring"><div class="highlight-inner">🏛️</div></div><span class="highlight-label">Politics</span></div>
+      <div class="highlight-item" onclick="openModal(4)"><div class="highlight-ring"><div class="highlight-inner">🎵</div></div><span class="highlight-label">Music</span></div>
+      <div class="highlight-item" onclick="openModal(5)"><div class="highlight-ring"><div class="highlight-inner">🎮</div></div><span class="highlight-label">Leisure</span></div>
+    </div>
+    <div class="profile-tabs"><div class="tab active">⊞ &nbsp;Posts</div></div>
+  </div>
+
+  <div class="post-grid">
+    <div class="grid-post" onclick="openModal(0)">
+      <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&h=600&fit=crop" alt="Sports" loading="lazy">
+      <div class="grid-post-overlay"><span class="overlay-stat">❤️ 847K</span><span class="overlay-stat">💬 4,201</span></div>
+      <span class="grid-topic-badge">🏈 Sports</span>
+    </div>
+    <div class="grid-post" onclick="openModal(1)">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=600&fit=crop" alt="Technology" loading="lazy">
+      <div class="grid-post-overlay"><span class="overlay-stat">❤️ 1.2M</span><span class="overlay-stat">💬 6,839</span></div>
+      <span class="grid-topic-badge">💻 Tech</span>
+    </div>
+    <div class="grid-post" onclick="openModal(2)">
+      <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop" alt="Cultural Icons" loading="lazy">
+      <div class="grid-post-overlay"><span class="overlay-stat">❤️ 993K</span><span class="overlay-stat">💬 5,110</span></div>
+      <span class="grid-topic-badge">⭐ Icons</span>
+    </div>
+    <div class="grid-post" onclick="openModal(3)">
+      <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&h=600&fit=crop" alt="Politics" loading="lazy">
+      <div class="grid-post-overlay"><span class="overlay-stat">❤️ 712K</span><span class="overlay-stat">💬 9,447</span></div>
+      <span class="grid-topic-badge">🏛️ Politics</span>
+    </div>
+    <div class="grid-post" onclick="openModal(4)">
+      <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=600&fit=crop" alt="Music" loading="lazy">
+      <div class="grid-post-overlay"><span class="overlay-stat">❤️ 1.5M</span><span class="overlay-stat">💬 7,623</span></div>
+      <span class="grid-topic-badge">🎵 Music</span>
+    </div>
+    <div class="grid-post" onclick="openModal(5)">
+      <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&h=600&fit=crop" alt="Recreation" loading="lazy">
+      <div class="grid-post-overlay"><span class="overlay-stat">❤️ 634K</span><span class="overlay-stat">💬 3,289</span></div>
+      <span class="grid-topic-badge">🎮 Recreation</span>
+    </div>
+  </div>
+
+  <div class="sources-section">
+    <div class="sources-title">📎 Sources</div>
+    <div class="sources-grid">
+      <div class="source-item"><a href="https://www.thescroller.net/80599/stars-who-defined-the-2000s/" target="_blank">thescroller.net — Stars of the 2000s</a></div>
+      <div class="source-item"><a href="https://www.cnbc.com/2018/06/14/elon-musk-kanye-west-and-steve-jobs-all-share-a-surprising-trait.html" target="_blank">cnbc.com — Musk, Jobs, Cultural Icons</a></div>
+      <div class="source-item"><a href="https://www.rollingstone.com/music/music-lists/100-best-songs-of-the-2000s-153056/" target="_blank">rollingstone.com — 100 Best Songs of the 2000s</a></div>
+      <div class="source-item"><a href="https://top40weekly.com/top-100-artists-of-the-00s/" target="_blank">top40weekly.com — Top 100 Artists of the 2000s</a></div>
+      <div class="source-item"><a href="https://mykissradio.com/2025/07/08/how-songs-in-the-2000s-reflected-major-social-political-and-technological-changes/" target="_blank">mykissradio.com — Music and Society in the 2000s</a></div>
+      <div class="source-item"><a href="https://www.whitehousehistory.org/collections/president-biographies" target="_blank">whitehousehistory.org — President Biographies</a></div>
+      <div class="source-item"><a href="https://nypost.com/2009/12/23/biggest-political-scandals-of-the-decade/" target="_blank">nypost.com — Political Scandals of the Decade</a></div>
+      <div class="source-item"><a href="https://www.congress.gov/legislation-popular-titles/106th-congress" target="_blank">congress.gov — Major Legislation</a></div>
+      <div class="source-item"><a href="https://www.thesportster.com/ever-super-bowl-2000s-ranked/" target="_blank">thesportster.com — Super Bowls of the 2000s</a></div>
+      <div class="source-item"><a href="https://www.olympics.com/en/brisbane-2032/news/sydney-2000-olympics-moments/" target="_blank">olympics.com — Sydney 2000 Olympics</a></div>
+      <div class="source-item"><a href="https://www.mlb.com/news/2000-world-series-recap" target="_blank">mlb.com — World Series Recap</a></div>
+      <div class="source-item"><a href="https://www.phillips.com/article/64244269/a5-2000-2005-culture" target="_blank">phillips.com — 2000s Culture</a></div>
+      <div class="source-item"><a href="https://kb.nkba.org/60th-anniversary/articles/down-memory-lane-music-fashion-and-entertainment-trends-of-the-2000s/" target="_blank">nkba.org — Entertainment Trends of the 2000s</a></div>
+      <div class="source-item"><a href="https://nichs.org.uk/about-us/blog/our-diet-through-the-decades-how-have-our-eating-habits-changed-since-1946" target="_blank">nichs.org.uk — American Diet Through the Decades</a></div>
+      <div class="source-item"><a href="https://orgs.wku.edu/ttas/anniversary/anniv-00s-inventions.php" target="_blank">wku.edu — Inventions of the 2000s</a></div>
+      <div class="source-item"><a href="https://medium.com/@njoguiany/forgotten-technologies-that-defined-the-2000s-e42180c14c62" target="_blank">medium.com — Technologies That Defined the 2000s</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-img-side">
+      <div class="modal-main-img"><img id="modalMainImg" src="" alt=""></div>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-content-side">
+      <div class="modal-header">
+        <div class="modal-avatar"><span>00s</span></div>
+        <div class="modal-user">the2000s_project</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <div class="modal-actions">
+          <button class="action-btn" onclick="toggleLike(this)">🤍</button>
+          <button class="action-btn">💬</button>
+          <button class="action-btn">📤</button>
+          <button class="action-btn save">🔖</button>
+        </div>
+        <div class="modal-likes" id="modalLikes"></div>
+        <div class="modal-date">2000s Decade — U.S. History</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const posts = [
+  {
+    topic: "🏈 Sports",
+    likes: "847,291",
+    by: "Daniel Aisner",
+    imgs: [
+      "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&fit=crop"
+    ],
+    qas: [
+      {
+        q: "Who won the Super Bowl?",
+        a: "The Patriots owned the early 2000s. They won 3 in 4 years (2002, 2004, 2005) with Tom Brady as QB who became the face of the NFL. The decade ended with the Giants pulling off one of the biggest upsets ever, beating the undefeated 18-0 Patriots in 2008. This is widely considered one of the greatest upsets in sports history."
+      },
+      {
+        q: "Where were the Olympics and what were the key highlights?",
+        a: "The big ones were the 2000 Sydney Olympics and the 2008 Beijing Olympics. In Sydney the U.S. dominated the medal count. In Beijing, Michael Phelps won 8 gold medals in a single Olympics, the most ever by any athlete in one game. It was one of the most watched moments in sports in all decades."
+      },
+      {
+        q: "Who won the World Series?",
+        a: "Two massive moments. The 2001 World Series happened right after 9/11 and the Diamondbacks beat the Yankees in 7 games. This meant a lot to the country emotionally. Then in 2004 the Red Sox broke the Curse of the Bambino. They hadn't won a World Series in 86 years. That was one of the biggest moments in baseball history."
+      },
+      {
+        q: "Important athletes and sporting events?",
+        a: "LeBron James entered the NBA in 2003. Shaq and Kobe won 3 straight championships with the Lakers in the early 2000s. Tiger Woods was dominating golf. Tom Brady was establishing himself as the GOAT of the NFL."
+      }
+    ],
+    tags: "#Patriots #TomBrady #LeBron #MichaelPhelps #RedSox #2000sSports #USHistory",
+    sources: [
+      { label: "thesportster.com — Super Bowls of the 2000s", url: "https://www.thesportster.com/ever-super-bowl-2000s-ranked/" },
+      { label: "olympics.com — Sydney 2000 Olympics", url: "https://www.olympics.com/en/brisbane-2032/news/sydney-2000-olympics-moments/" },
+      { label: "mlb.com — World Series Recap", url: "https://www.mlb.com/news/2000-world-series-recap" }
+    ]
+  },
+  {
+    topic: "💻 Technology and Inventions",
+    likes: "1,204,883",
+    by: "Daniel Aisner",
+    imgs: [
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1601944179066-29786cb9d32a?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&fit=crop"
+    ],
+    qas: [
+      {
+        q: "What important inventions came out of the decade?",
+        a: "The iPod (2001), the iPhone (2007), YouTube (2005), and Facebook (2004) are the four biggest ones. Every single one of them is still a massive part of life today."
+      },
+      {
+        q: "What are some examples of technology from the decade?",
+        a: "Flat screen TVs replaced those boxy CRT ones. DVDs replaced VHS tapes. WiFi started becoming normal at homes."
+      },
+      {
+        q: "How did the inventions impact the American people?",
+        a: "People went from physical maps and Sony Walkmans to all of the above in their pocket."
+      },
+      {
+        q: "In what ways did new technology help people of the decade?",
+        a: "Communication is now super simple because of everything that launched this decade."
+      }
+    ],
+    tags: "#iPod #iPhone #YouTube #Facebook #2000sTech #SteveJobs #USHistory",
+    sources: [
+      { label: "wku.edu — Inventions of the 2000s", url: "https://orgs.wku.edu/ttas/anniversary/anniv-00s-inventions.php" },
+      { label: "medium.com — Technologies That Defined the 2000s", url: "https://medium.com/@njoguiany/forgotten-technologies-that-defined-the-2000s-e42180c14c62" }
+    ]
+  },
+  {
+    topic: "⭐ Important People and Cultural Icons",
+    likes: "993,012",
+    by: "Daniel Aisner",
+    imgs: [
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=900&fit=crop"
+    ],
+    qas: [
+      {
+        q: "Who were some famous or influential people from the decade?",
+        a: "Obama, Beyoncé, Elon Musk, and Steve Jobs."
+      },
+      {
+        q: "Why were these individuals important or popular at the time?",
+        a: "Obama made history as the first Black president in 2008. Beyoncé went from Destiny's Child to solo superstar and Crazy in Love (2003) made her one of the biggest artists on the planet. Elon Musk was building Tesla and SpaceX under the radar. Steve Jobs dropped the iPod in 2001 and the iPhone in 2007. These both completely changed how people lived."
+      },
+      {
+        q: "How did these people influence American culture, politics, entertainment, or society?",
+        a: "Obama's election was a generational turning point on race and leadership. Beyoncé wasn't just a singer, she was a brand and a cultural force. Jobs created the whole smartphone industry which changed communication forever. Musk pushed the electric car conversation into the mainstream through Tesla."
+      },
+      {
+        q: "Are these people still remembered or influential today?",
+        a: "Yes, all four. Obama is still one of the most recognized political figures worldwide. Beyoncé is arguably bigger now. Jobs passed in 2011 but his legacy runs through every iPhone. Musk is one of the most talked about people on earth right now with Tesla, SpaceX, and X."
+      }
+    ],
+    tags: "#Obama #Beyonce #ElonMusk #SteveJobs #CulturalIcons #2000s #USHistory",
+    sources: [
+      { label: "thescroller.net — Stars Who Defined the 2000s", url: "https://www.thescroller.net/80599/stars-who-defined-the-2000s/" },
+      { label: "cnbc.com — Musk, Jobs and Cultural Icons", url: "https://www.cnbc.com/2018/06/14/elon-musk-kanye-west-and-steve-jobs-all-share-a-surprising-trait.html" }
+    ]
+  },
+  {
+    topic: "🏛️ Politics",
+    likes: "712,449",
+    by: "Connor Juncaj",
+    imgs: [
+      "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=900&fit=crop"
+    ],
+    qas: [
+      {
+        q: "Who were the presidents during the decade? What were they known for?",
+        a: "Bill Clinton was known for economic leadership and produced budget surpluses. George W. Bush was known for a lot of war and military conflicts. Barack Obama was the first Black president, focused on economic recovery, and won the Nobel Peace Prize."
+      },
+      {
+        q: "Any wars or military conflicts?",
+        a: "9/11, the war in Afghanistan, and the Iraq War."
+      },
+      {
+        q: "Any political scandals?",
+        a: "The Jack Abramoff Scandal, the John Edwards affair, and the Valerie Plame affair."
+      },
+      {
+        q: "What were the major pieces of legislation that passed during the decade?",
+        a: "The USA PATRIOT Act, the Sarbanes-Oxley Act, and the Medicare Modernization Act."
+      }
+    ],
+    tags: "#GeorgeBush #BarackObama #9/11 #IraqWar #PATRIOTAct #USHistory",
+    sources: [
+      { label: "whitehousehistory.org — President Biographies", url: "https://www.whitehousehistory.org/collections/president-biographies" },
+      { label: "nypost.com — Political Scandals of the Decade", url: "https://nypost.com/2009/12/23/biggest-political-scandals-of-the-decade/" },
+      { label: "congress.gov — Major Legislation", url: "https://www.congress.gov/legislation-popular-titles/106th-congress" }
+    ]
+  },
+  {
+    topic: "🎵 Music",
+    likes: "1,521,334",
+    by: "Connor Juncaj",
+    imgs: [
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&fit=crop"
+    ],
+    qas: [
+      {
+        q: "What type of music was popular during the 2000s?",
+        a: "A mix of teen pop, hip-hop, R&B, and rock."
+      },
+      {
+        q: "Specific examples — Top songs?",
+        a: "Kelly Clarkson's Since U Been Gone at #18, Justin Timberlake's Cry Me a River at #20, Rihanna's Umbrella at #23, and Britney Spears' Toxic at #44."
+      },
+      {
+        q: "What musicians were popular?",
+        a: "Outkast, Eminem, Coldplay, Radiohead, Kanye West, Alicia Keys, Red Hot Chili Peppers, Jay-Z, Usher, and Beyoncé."
+      },
+      {
+        q: "How were Americans reacting to the music of the decade?",
+        a: "Back then it wasn't loved very much but now it's loved."
+      }
+    ],
+    tags: "#Eminem #Beyonce #Usher #KanyeWest #Rihanna #2000sMusic #USHistory",
+    sources: [
+      { label: "rollingstone.com — 100 Best Songs of the 2000s", url: "https://www.rollingstone.com/music/music-lists/100-best-songs-of-the-2000s-153056/" },
+      { label: "top40weekly.com — Top 100 Artists of the 2000s", url: "https://top40weekly.com/top-100-artists-of-the-00s/" },
+      { label: "mykissradio.com — Music and Society in the 2000s", url: "https://mykissradio.com/2025/07/08/how-songs-in-the-2000s-reflected-major-social-political-and-technological-changes/" }
+    ]
+  },
+  {
+    topic: "🎮 Recreation and Leisure",
+    likes: "634,771",
+    by: "Connor Juncaj",
+    imgs: [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&fit=crop"
+    ],
+    qas: [
+      {
+        q: "What venue was used for entertainment?",
+        a: "Reality TV was big. American Idol, Survivor, and The Simple Life with Paris Hilton were everywhere. At the movie theater Spider-Man and Harry Potter were must-sees. Music through iTunes and concerts was huge. Video games with the PS2 and Xbox were a massive part of home entertainment."
+      },
+      {
+        q: "Any popular movie stars or sports figures?",
+        a: "Actors: Will Smith, Johnny Depp, Tobey Maguire, and Christian Bale. Sports: Tom Brady, LeBron James, Kobe Bryant, and Tiger Woods."
+      },
+      {
+        q: "Popular activities?",
+        a: "Video games like Halo, Guitar Hero, GTA, and Tony Hawk Skater. For dancing people copied what they saw in music videos. Social media wise it was AIM and MySpace."
+      },
+      {
+        q: "What was the American diet like?",
+        a: "A lot of fast food. McDonald's, Subway, Applebee's, Starbucks, and Chipotle. Food Network was popular. Most families ate out instead of at home."
+      }
+    ],
+    tags: "#AmericanIdol #SpiderMan #Xbox #AIM #MySpace #Starbucks #2000sLife #USHistory",
+    sources: [
+      { label: "phillips.com — 2000s Culture", url: "https://www.phillips.com/article/64244269/a5-2000-2005-culture" },
+      { label: "thescroller.net — Stars of the 2000s", url: "https://www.thescroller.net/80599/stars-who-defined-the-2000s/" },
+      { label: "nkba.org — Entertainment Trends of the 2000s", url: "https://kb.nkba.org/60th-anniversary/articles/down-memory-lane-music-fashion-and-entertainment-trends-of-the-2000s/" },
+      { label: "nichs.org.uk — American Diet Through the Decades", url: "https://nichs.org.uk/about-us/blog/our-diet-through-the-decades-how-have-our-eating-habits-changed-since-1946" }
+    ]
+  }
+];
+
+let currentPost = 0;
+let currentImg = 0;
+
+function openModal(i) {
+  currentPost = i;
+  currentImg = 0;
+  renderModal();
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderModal() {
+  const p = posts[currentPost];
+  document.getElementById('modalMainImg').src = p.imgs[currentImg];
+  document.getElementById('modalLikes').textContent = p.likes + ' likes';
+
+  const thumbsEl = document.getElementById('modalThumbs');
+  thumbsEl.innerHTML = p.imgs.map((img, idx) =>
+    `<div class="modal-thumb ${idx === currentImg ? 'active' : ''}" onclick="switchImg(${idx})">
+      <img src="${img}" alt="">
+    </div>`
+  ).join('');
+
+  let html = `<div class="modal-topic-header">${p.topic}</div>`;
+  html += `<div class="modal-by">Research by ${p.by}</div>`;
+
+  p.qas.forEach((qa, idx) => {
+    html += `<div class="modal-qa"><div class="qa-q">${qa.q}</div><div class="qa-a">${qa.a}</div></div>`;
+    if (idx < p.qas.length - 1) html += `<div class="qa-divider"></div>`;
+  });
+
+  html += `<div class="modal-tags">${p.tags}</div>`;
+  html += `<div class="modal-source">Sources:<br>` + p.sources.map(s =>
+    `<a href="${s.url}" target="_blank">${s.label}</a>`
+  ).join('<br>') + `</div>`;
+
+  document.getElementById('modalBody').innerHTML = html;
+}
+
+function switchImg(idx) {
+  currentImg = idx;
+  document.getElementById('modalMainImg').src = posts[currentPost].imgs[idx];
+  document.querySelectorAll('.modal-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function toggleLike(btn) {
+  btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
