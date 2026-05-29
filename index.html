@@ -25,6 +25,10 @@
   .cover-sub { font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 300; color: rgba(255,255,255,0.6); margin-top: 1.5rem; position: relative; animation: fadeUp 1s ease 0.2s both; }
   .cover-question { margin-top: 2.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.2rem 2rem; font-size: 1rem; color: rgba(255,255,255,0.7); font-weight: 300; max-width: 560px; position: relative; animation: fadeUp 1s ease 0.4s both; }
   .cover-question strong { color: #fff; font-weight: 600; }
+  .cover-phrases { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 2rem; position: relative; animation: fadeUp 1s ease 0.5s both; }
+  .cover-slogan { font-size: 1rem; color: rgba(255,255,255,0.75); font-style: italic; font-weight: 300; }
+  .cover-catchphrase { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #FF2D78; letter-spacing: 0.05em; }
+  .cover-saying { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; }
   .cover-names { margin-top: 2rem; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); position: relative; animation: fadeUp 1s ease 0.6s both; }
   .cover-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.2); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; animation: bounce 2s ease infinite; }
  
@@ -148,6 +152,11 @@
   <div class="cover-decade">2000s</div>
   <div class="cover-sub">How Did This Decade Shape and Change America?</div>
   <div class="cover-question">From <strong>9/11</strong> to the <strong>iPhone</strong>, from <strong>LeBron</strong> to <strong>Beyoncé</strong>, the 2000s changed everything about how Americans live, communicate, and see the world.</div>
+  <div class="cover-phrases">
+    <div class="cover-slogan">"A decade that changed everything — one iPod at a time."</div>
+    <div class="cover-catchphrase">"Loading... please wait. It's the 2000s."</div>
+    <div class="cover-saying">"Different decade, same hustle."</div>
+  </div>
   <div class="cover-names">Daniel Aisner · Connor Juncaj · West Bloomfield High School</div>
   <div class="cover-scroll">▼ scroll</div>
 </section>
@@ -286,8 +295,8 @@ const posts = [
     by: "Daniel Aisner",
     imgs: [
       "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&fit=crop",
-      "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&fit=crop",
-      "https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&fit=crop",
+      "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&fit=crop"
     ],
     qas: [
       {
@@ -623,4 +632,3 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal
 </script>
 </body>
 </html>
- 
